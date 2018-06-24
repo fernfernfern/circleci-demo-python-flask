@@ -16,7 +16,3 @@ jobs:
           key: -v1-{{ checksum "requirements/dev.txt" }}
           paths:
             - "venv"
-      - run:
-          command: |
-            . venv/bin/activate
-            python manage.py test
