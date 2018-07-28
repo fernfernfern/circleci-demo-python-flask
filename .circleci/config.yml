@@ -2,17 +2,17 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: circleci/python
     steps:
       - checkout
       - restore_cache:
-          key: v2-{{ checksum "requirements/dev.txt" }}
+          key: -v3-{{ checksum "requirements/dev.txt" }}
       - run:
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
-          key: v2-{{ checksum "requirements/dev.txt" }}
+          key: -v3-{{ checksum "requirements/dev.txt" }}
           paths:
             - "venv"
