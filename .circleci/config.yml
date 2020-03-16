@@ -2,6 +2,7 @@ version: 2.1
 
 jobs:
   build:
+    parallelism: 2
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         environment:
@@ -28,6 +29,7 @@ jobs:
       - run:
           command: |
             . venv/bin/activate
+            circleci tests glob tests/**/*.py | circleci tests split --split-by=timings | xargs python -m unittest
             python manage.py test
       - store_artifacts:
           path: test-reports/
